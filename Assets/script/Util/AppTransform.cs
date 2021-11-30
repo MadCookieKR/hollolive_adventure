@@ -24,7 +24,6 @@ public class AppTransform
             }
             yield return new WaitForFixedUpdate();
         }
-
-
     }
+
 }
