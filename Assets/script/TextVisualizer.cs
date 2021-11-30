@@ -6,20 +6,24 @@ using UnityEngine.UI;
 
 public class TextVisualizer : MonoBehaviour
 {
-    public Text text;
+    public Text speakerText;
+    public Text contentText;
     public float textSpeed = 0.05F;
 
     [HideInInspector]
-    public List<string> scripts = new List<string>();
+    public List<Script> scripts = new List<Script>();
 
     private int scriptIndex = 1;
 
     // Start is called before the first frame update
     void Start()
     {
+        scripts = new ScriptLoader().loadScript();
+       
         if (scripts.Count > 0)
         {
-            text.text = scripts[0];
+            speakerText.text = scripts[0].speaker;
+            contentText.text = scripts[0].content;
         }
     }
 
@@ -33,18 +37,20 @@ public class TextVisualizer : MonoBehaviour
                 return;
             }
 
-            StopCoroutine("showScript");
-            StartCoroutine("showScript", scripts[scriptIndex++]);
+            StopCoroutine("showContent");
+            speakerText.text = scripts[scriptIndex].speaker;
+            StartCoroutine("showContent", scripts[scriptIndex].content);
+            scriptIndex++;
         }
     }
 
-    IEnumerator showScript(string script)
+    IEnumerator showContent(string script)
     {
         int textIndex = 1;
 
         while (textIndex <= script.Length)
         {
-            text.text = script.Substring(0, textIndex++);
+            contentText.text = script.Substring(0, textIndex++);
             yield return new WaitForSeconds(textSpeed);
         }
     }

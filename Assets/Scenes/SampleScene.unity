@@ -134,8 +134,10 @@ GameObject:
   - component: {fileID: 335430332}
   - component: {fileID: 335430334}
   - component: {fileID: 335430333}
+  - component: {fileID: 335430336}
+  - component: {fileID: 335430335}
   m_Layer: 5
-  m_Name: Script
+  m_Name: Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,6 +204,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 335430331}
   m_CullTransparentMesh: 1
+--- !u!114 &335430335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335430331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1cfb7ed865fdb439b8c56a31d897a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textVisualizer: {fileID: 335430336}
+  actFolderPath: A1
+  currentScript: 1
+--- !u!114 &335430336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335430331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d339c843b5c46fc4da3705ab5a9575c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerText: {fileID: 0}
+  contentText: {fileID: 0}
+  textSpeed: 0.05
 --- !u!1 &401810963
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,6 +589,7 @@ GameObject:
   - component: {fileID: 1115995513}
   - component: {fileID: 1115995515}
   - component: {fileID: 1115995514}
+  - component: {fileID: 1115995517}
   m_Layer: 5
   m_Name: ScriptDialog
   m_TagString: Untagged
@@ -623,6 +656,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115995512}
   m_CullTransparentMesh: 1
+--- !u!114 &1115995517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115995512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d339c843b5c46fc4da3705ab5a9575c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerText: {fileID: 401810965}
+  contentText: {fileID: 335430333}
+  textSpeed: 0.05
 --- !u!1 &1886975273
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,6 +681,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1886975275}
   - component: {fileID: 1886975274}
+  - component: {fileID: 1886975276}
   m_Layer: 0
   m_Name: Ayames
   m_TagString: Untagged
@@ -705,6 +754,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1886975276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886975273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b1f8ebc6bf3f384cbb91ff81acb988f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1886975274}
 --- !u!1 &1922359868
 GameObject:
   m_ObjectHideFlags: 0
