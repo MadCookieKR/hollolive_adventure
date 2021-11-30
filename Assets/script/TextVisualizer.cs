@@ -8,6 +8,8 @@ public class TextVisualizer : MonoBehaviour
 {
     public Text text;
     public float textSpeed = 0.05F;
+
+    [HideInInspector]
     public List<string> scripts = new List<string>();
 
     private int scriptIndex = 1;
@@ -31,6 +33,7 @@ public class TextVisualizer : MonoBehaviour
                 return;
             }
 
+            StopCoroutine("showScript");
             StartCoroutine("showScript", scripts[scriptIndex++]);
         }
     }
