@@ -8,6 +8,7 @@ public class TextVisualizer : MonoBehaviour
 {
     public Text speakerText;
     public Text contentText;
+    public SpriteRenderer backgroundRenderer;
     public float textSpeed = 0.05F;
 
     [HideInInspector]
@@ -22,8 +23,7 @@ public class TextVisualizer : MonoBehaviour
        
         if (scripts.Count > 0)
         {
-            speakerText.text = scripts[0].speaker;
-            contentText.text = scripts[0].content;
+            updateScript(scripts[0]);
         }
     }
 
@@ -37,10 +37,7 @@ public class TextVisualizer : MonoBehaviour
                 return;
             }
 
-            StopCoroutine("showContent");
-            speakerText.text = scripts[scriptIndex].speaker;
-            StartCoroutine("showContent", scripts[scriptIndex].content);
-            scriptIndex++;
+            updateScript(scripts[scriptIndex++]);
         }
     }
 
@@ -53,5 +50,13 @@ public class TextVisualizer : MonoBehaviour
             contentText.text = script.Substring(0, textIndex++);
             yield return new WaitForSeconds(textSpeed);
         }
+    }
+
+    private void updateScript(Script script)
+    {
+        StopCoroutine("showContent");
+        speakerText.text = script.speaker;
+        StartCoroutine("showContent", script.content);
+        backgroundRenderer.sprite = script.background;
     }
 }

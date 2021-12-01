@@ -12,11 +12,13 @@ public class ScriptLoader
     // Start is called before the first frame update
     public List<Script> loadScript()
     {
-        string scriptFilePath = "Assets/InGameScript/" + actFolderPath + "/" + currentScript + ".txt";
+        TextAsset scriptText = Resources.Load<TextAsset>("InGameScripts/" + actFolderPath + "/" + currentScript);
 
         ScriptParser parser = new ScriptParser();
 
-        return File.ReadAllLines(scriptFilePath).Select(line =>parser.parse(line)).ToList();
+        Debug.Log(scriptText.text);
+
+        return scriptText.text.Split('\n').Select(line =>parser.parse(line)).ToList();
     }
 
 }
