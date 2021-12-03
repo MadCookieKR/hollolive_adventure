@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class SpriteLoader
 {
-    private Cache<Sprite> spriteCache = new Cache<Sprite>();
+    private static Cache<Sprite> spriteCache = new Cache<Sprite>();
 
-    public Sprite load(string resourcePath)
+    public static Sprite load(string resourcePath)
     {
         Sprite sprite = spriteCache.get(resourcePath);
         if (sprite != null)

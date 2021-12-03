@@ -8,36 +8,42 @@ public class TextVisualizer : MonoBehaviour
 {
     public Text speakerText;
     public Text contentText;
-    public SpriteRenderer backgroundRenderer;
     public float textSpeed = 0.05F;
+
+    public string scenarioName;
+
+    [SerializeField]
+    public ScenarioArgument ScenarioArgument;
 
     [HideInInspector]
     public List<Script> scripts = new List<Script>();
 
-    private int scriptIndex = 1;
+    private int scriptIndex = 0;
+    private Scenario scenario;
 
     // Start is called before the first frame update
     void Start()
     {
+        scenario = ScenarioFactory.createScenario(scenarioName, ScenarioArgument);
         scripts = new ScriptLoader().loadScript();
        
         if (scripts.Count > 0)
         {
-            updateScript(scripts[0]);
+            updateScript(scripts[scriptIndex]);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (scriptIndex >= scripts.Count)
             {
                 return;
             }
 
-            updateScript(scripts[scriptIndex++]);
+            updateScript(scripts[scriptIndex]);
         }
     }
 
@@ -57,6 +63,7 @@ public class TextVisualizer : MonoBehaviour
         StopCoroutine("showContent");
         speakerText.text = script.speaker;
         StartCoroutine("showContent", script.content);
-        backgroundRenderer.sprite = script.background;
+        scenario.excute(scriptIndex);
+        scriptIndex++;
     }
 }

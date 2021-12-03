@@ -16,8 +16,6 @@ public class ScriptLoader
 
         ScriptParser parser = new ScriptParser();
 
-        Debug.Log(scriptText.text);
-
         return scriptText.text.Split('\n').Select(line =>parser.parse(line)).ToList();
     }
 
