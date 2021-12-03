@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class TextVisualizer : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public Text speakerText;
     public Text contentText;
@@ -24,7 +24,7 @@ public class TextVisualizer : MonoBehaviour
        
         if (scripts.Count > 0)
         {
-            updateScript(scripts[scriptIndex]);
+            updateState(scripts[scriptIndex]);
         }
     }
 
@@ -38,7 +38,7 @@ public class TextVisualizer : MonoBehaviour
                 return;
             }
 
-            updateScript(scripts[scriptIndex]);
+            updateState(scripts[scriptIndex]);
         }
     }
 
@@ -53,7 +53,7 @@ public class TextVisualizer : MonoBehaviour
         }
     }
 
-    private void updateScript(Script script)
+    private void updateState(Script script)
     {
         StopCoroutine("showContent");
         speakerText.text = script.speaker;
