@@ -10,7 +10,20 @@ public class TextVisualizer : MonoBehaviour
     public float secondPerChar = 0.02F;
 
     private List<Script> scripts = new List<Script>();
-    public Script currentScript { get { return scripts[scriptIndex]; } }
+    public Script? currentScript
+    {
+        get
+        {
+            if (scriptIndex < scripts.Count)
+            {
+                return scripts[scriptIndex];
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
 
     private int _scriptIndex = 0;
     public int scriptIndex { get { return _scriptIndex; } }

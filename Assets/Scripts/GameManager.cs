@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour
@@ -13,12 +10,15 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
         {
-            updateState(textVisualizer.currentScript);
+            if (textVisualizer.currentScript != null)
+            {
+                updateState((Script)textVisualizer.currentScript);
+            }
         }
     }
 
     private void updateState(Script script)
     {
-        scenario.excute(textVisualizer.scriptIndex);
+        scenario.excute(textVisualizer.scriptIndex + 1);
     }
 }
