@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class ScenarioA1 : Scenario
 {
-    public ScenarioA1(ScenarioArgument arg)
-    {
-        this.arg = arg;
-    }
+    [SerializeField]
+    private SpriteRenderer backgroundRenderer;
 
-    ScenarioArgument arg;
-
-    public void excute(int scriptIndex)
+    public override void excute(int scriptIndex)
     {
         switch (scriptIndex)
         {
-            case 0:
-                arg.backgroundRenderer.sprite = SpriteLoader.load("Images/A1/Backgrounds/gura_pizza");
+            case 1:
+                backgroundRenderer.sprite = SpriteLoader.load("Images/A1/Backgrounds/gura_pizza");
                 break;
         }
     }

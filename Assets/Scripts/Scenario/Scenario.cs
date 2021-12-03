@@ -1,34 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-public interface Scenario
+public abstract class Scenario : MonoBehaviour
 {
-    void excute(int scriptIndex);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="scriptIndex">starts from 1</param>
+    abstract public void excute(int scriptIndex);
 }
 
-[Serializable]
-public class ScenarioArgument
-{
-    public SpriteRenderer backgroundRenderer;
-
-    public ScenarioArgument(SpriteRenderer backgroundRenderer)
-    {
-        this.backgroundRenderer = backgroundRenderer;
-    }
-}
-
-public class ScenarioFactory
-{
-    static public Scenario createScenario(string actName, ScenarioArgument arg)
-    {
-        switch (actName)
-        {
-            case "A1":
-                return new ScenarioA1(arg);
-            default:
-                return new ScenarioA1(arg);
-        }
-    }
-}

@@ -10,21 +10,16 @@ public class TextVisualizer : MonoBehaviour
     public Text contentText;
     public float textSpeed = 0.05F;
 
-    public string scenarioName;
-
-    [SerializeField]
-    public ScenarioArgument ScenarioArgument;
+    public Scenario scenario;
 
     [HideInInspector]
     public List<Script> scripts = new List<Script>();
 
     private int scriptIndex = 0;
-    private Scenario scenario;
 
     // Start is called before the first frame update
     void Start()
     {
-        scenario = ScenarioFactory.createScenario(scenarioName, ScenarioArgument);
         scripts = new ScriptLoader().loadScript();
        
         if (scripts.Count > 0)
@@ -63,7 +58,7 @@ public class TextVisualizer : MonoBehaviour
         StopCoroutine("showContent");
         speakerText.text = script.speaker;
         StartCoroutine("showContent", script.content);
-        scenario.excute(scriptIndex);
+        scenario.excute(scriptIndex + 1);
         scriptIndex++;
     }
 }
