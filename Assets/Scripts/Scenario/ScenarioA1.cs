@@ -17,6 +17,8 @@ public class ScenarioA1 : Scenario
     [SerializeField]
     private GameObject scriptDialog;
     [SerializeField]
+    private TextVisualizer textVisualizer;
+    [SerializeField]
     private List<AUDIO> audioKeys;
     [SerializeField]
     private List<AudioSource> audioValues;
@@ -64,10 +66,13 @@ public class ScenarioA1 : Scenario
                 audioDict[AUDIO.FX_GURA_PIZZA].Play();
                 break;
             case 34:
-                StartCoroutine(startTransition());
+                textVisualizer.isBlock = true;
                 break;
             case 35:
+                StartCoroutine(startTransition());
+                textVisualizer.isBlock = false;
                 break;
+        
         }
     }
 
