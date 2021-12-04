@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +9,7 @@ public class ScenarioA1 : Scenario
     [Serializable]
     public enum AUDIO
     {
-        BGM_LOADING, FX_GURA_PIZZA, PX_GURA_PIZZA_TIME
+        BGM_LOADING, FX_GURA_PIZZA, PX_GURA_PIZZA_TIME, BGM_GALAXY, FX_GURA_HUM
     }
 
     [SerializeField]
@@ -30,6 +30,9 @@ public class ScenarioA1 : Scenario
 
     private AppTransform mainCamTransform;
 
+    private bool isUpdatePause = false;
+    private bool isTextVisualizerPause = false;
+
     void Start()
     {
         for (int i = 0; i < audioKeys.Count; i++)
@@ -41,12 +44,37 @@ public class ScenarioA1 : Scenario
         backgroundRenderer.sprite = SpriteLoader.load("Images/A1/Backgrounds/gura_pizza");
         transition = new Transition(transitionImage);
         scriptDialog.SetActive(false);
+
+        textVisualizer.onStart(this);
     }
 
     private void Update()
     {
+        if (!audioDict[AUDIO.BGM_GALAXY].isPlaying)
+        {
+            isUpdatePause = false;
+        }
+
+        if (isUpdatePause)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
         {
+            if (textVisualizer.currentScript != null)
+            {
+                excute(textVisualizer.scriptIndex);
+                if (!isTextVisualizerPause)
+                {
+                    textVisualizer.onUpdate(this);
+                }
+
+                textVisualizer.incrementScriptIndex();
+            }
+
+
+
             if (scriptDialog.activeSelf == false)
             {
                 scriptDialog.SetActive(true);
@@ -65,14 +93,32 @@ public class ScenarioA1 : Scenario
             case 7:
                 audioDict[AUDIO.FX_GURA_PIZZA].Play();
                 break;
-            case 34:
-                textVisualizer.isBlock = true;
-                break;
             case 35:
                 StartCoroutine(startTransition());
-                textVisualizer.isBlock = false;
+                isTextVisualizerPause = true;
                 break;
-        
+            case 36:
+                isTextVisualizerPause = false;
+                break;
+            case 51:
+                audioDict[AUDIO.FX_GURA_HUM].Play();
+                break;
+            case 57:
+                audioDict[AUDIO.BGM_LOADING].Stop();
+                audioDict[AUDIO.FX_GURA_HUM].Stop();
+                audioDict[AUDIO.BGM_GALAXY].Play();
+                break;
+            case 60:
+                isUpdatePause = true;
+                isTextVisualizerPause = true;
+                break;
+            case 61:
+                isUpdatePause = false;
+                isTextVisualizerPause = false;
+                break;
+
+
+
         }
     }
 

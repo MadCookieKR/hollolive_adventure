@@ -1,20 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TextVisualizer : MonoBehaviour
+[Serializable]
+public class TextVisualizer
 {
     public Text speakerText;
     public Text contentText;
     public float secondPerChar = 0.02F;
     public bool isUpdateStateOnAwake = false;
 
-    /// <summary>
-    /// true : 현재 스크립트를 다이어로그에 적지 않는다.
-    /// </summary>
-    [HideInInspector]
-    public bool isBlock { get; set; } = false;
 
     private List<Script> scripts = new List<Script>();
     public Script? currentScript
@@ -33,28 +30,29 @@ public class TextVisualizer : MonoBehaviour
     }
 
     //1부터 시작한다.
-    private int _scriptIndex = 30;
+    private int _scriptIndex = 53;
     public int scriptIndex { get { return _scriptIndex; } }
     public void incrementScriptIndex()
     {
         _scriptIndex++;
     }
 
-   
-    void Start()
+
+    private IEnumerator updateStateCoroutine;
+
+    public void onStart(MonoBehaviour monoBehaviour)
     {
         //인덱스 시작을 1로 맞추기 위한 더미 스크립트
         scripts.Add(new Script());
         scripts.AddRange(new ScriptLoader().loadScript());
 
-
         if (isUpdateStateOnAwake && scripts.Count > 0)
         {
-            updateState(scripts[scriptIndex]);
+            monoBehaviour.StartCoroutine(updateStateCoroutine);
         }
     }
 
-    void Update()
+    public void onUpdate(MonoBehaviour monoBehaviour)
     {
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -63,9 +61,22 @@ public class TextVisualizer : MonoBehaviour
                 return;
             }
 
-            updateState(scripts[scriptIndex]);
+            if (updateStateCoroutine != null)
+            {
+                monoBehaviour.StopCoroutine(updateStateCoroutine);
+            }
+            updateStateCoroutine = updateState(scripts[scriptIndex]);
+            monoBehaviour.StartCoroutine(updateStateCoroutine);
         }
     }
+
+
+    IEnumerator updateState(Script script)
+    {
+        speakerText.text = script.speaker;
+        yield return showContent(script.content);
+    }
+
 
     IEnumerator showContent(string script)
     {
@@ -76,17 +87,6 @@ public class TextVisualizer : MonoBehaviour
             contentText.text = script.Substring(0, textIndex++);
             yield return new WaitForSeconds(secondPerChar);
         }
-    }
-
-    private void updateState(Script script)
-    {
-        if (isBlock)
-        {
-            return;
-        }
-        StopCoroutine("showContent");
-        speakerText.text = script.speaker;
-        StartCoroutine("showContent", script.content);
     }
 
 
