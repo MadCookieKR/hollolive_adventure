@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScenarioA1 : Scenario
 {
@@ -18,6 +20,9 @@ public class ScenarioA1 : Scenario
     private List<AUDIO> audioKeys;
     [SerializeField]
     private List<AudioSource> audioValues;
+    [SerializeField]
+    private Image transitionImage;
+    private Transition transition;
 
     private Dictionary<AUDIO, AudioSource> audioDict = new Dictionary<AUDIO, AudioSource>();
 
@@ -32,6 +37,7 @@ public class ScenarioA1 : Scenario
 
         mainCamTransform = new AppTransform(Camera.main.transform);
         backgroundRenderer.sprite = SpriteLoader.load("Images/A1/Backgrounds/gura_pizza");
+        transition = new Transition(transitionImage);
         scriptDialog.SetActive(false);
     }
 
@@ -58,12 +64,19 @@ public class ScenarioA1 : Scenario
                 audioDict[AUDIO.FX_GURA_PIZZA].Play();
                 break;
             case 34:
-                backgroundRenderer.sprite = SpriteLoader.load("Images/A1/Backgrounds/gura_song");
-                mainCamTransform.translate(new Vector2(0, -9));
-                StartCoroutine(mainCamTransform.moveSmooth(new Vector2(0, 7), 0.5f));
+                StartCoroutine(startTransition());
                 break;
             case 35:
                 break;
         }
+    }
+
+    private IEnumerator startTransition()
+    {
+        yield return transition.fadeOut(0.5f / 2);
+        backgroundRenderer.sprite = SpriteLoader.load("Images/A1/Backgrounds/gura_song");
+        mainCamTransform.translate(new Vector2(0, -9));
+        yield return transition.fadeIn(0.5f / 2);
+        yield return mainCamTransform.moveSmooth(new Vector2(0, 7), 0.5f);
     }
 }

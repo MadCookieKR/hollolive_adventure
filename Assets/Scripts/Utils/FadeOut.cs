@@ -13,16 +13,14 @@ public class FadeOut
 
     public IEnumerator start(float duration)
     {
-        float alpha = 1f;
         float amount = 0.1f;
-        while(alpha > 0f)
+        while(spriteRenderer.color.a > 0f)
         {
-            alpha -= amount;
             Color c = spriteRenderer.color;
-            c.a = alpha;
+            c.a -= amount;
             spriteRenderer.color = c;
 
-            yield return new WaitForSeconds(duration * amount);
+            yield return new WaitForSeconds(duration * 0.1f);
         }
         
     }

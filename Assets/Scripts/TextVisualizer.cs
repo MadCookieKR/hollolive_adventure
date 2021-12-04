@@ -26,6 +26,7 @@ public class TextVisualizer : MonoBehaviour
         }
     }
 
+    //1부터 시작한다.
     private int _scriptIndex = 33;
     public int scriptIndex { get { return _scriptIndex; } }
     public void incrementScriptIndex()
