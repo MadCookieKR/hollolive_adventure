@@ -8,6 +8,7 @@ public class TextVisualizer : MonoBehaviour
     public Text speakerText;
     public Text contentText;
     public float secondPerChar = 0.02F;
+    public bool updateStateOnAwake = false;
 
     private List<Script> scripts = new List<Script>();
     public Script? currentScript
@@ -25,29 +26,27 @@ public class TextVisualizer : MonoBehaviour
         }
     }
 
-    private int _scriptIndex = 1;
+    private int _scriptIndex = 33;
     public int scriptIndex { get { return _scriptIndex; } }
+    public void incrementScriptIndex()
+    {
+        _scriptIndex++;
+    }
 
-    // Start is called before the first frame update
+   
     void Start()
     {
         //인덱스 시작을 1로 맞추기 위한 더미 스크립트
         scripts.Add(new Script());
+        scripts.AddRange(new ScriptLoader().loadScript());
 
-        scripts = new ScriptLoader().loadScript();
 
-        for(int i = 1; i<scripts.Count; i++)
-        {
-            Debug.Log("index: " + i + " content: " + scripts[i].content);
-        }
-
-        if (scripts.Count > 0)
+        if (updateStateOnAwake && scripts.Count > 0)
         {
             updateState(scripts[scriptIndex]);
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
@@ -77,7 +76,6 @@ public class TextVisualizer : MonoBehaviour
         StopCoroutine("showContent");
         speakerText.text = script.speaker;
         StartCoroutine("showContent", script.content);
-        _scriptIndex++;
     }
 
 

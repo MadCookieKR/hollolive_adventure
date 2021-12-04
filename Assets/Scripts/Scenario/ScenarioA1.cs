@@ -32,6 +32,7 @@ public class ScenarioA1 : Scenario
 
         mainCamTransform = new AppTransform(Camera.main.transform);
         backgroundRenderer.sprite = SpriteLoader.load("Images/A1/Backgrounds/gura_pizza");
+        scriptDialog.SetActive(false);
     }
 
     private void Update()
@@ -48,7 +49,6 @@ public class ScenarioA1 : Scenario
 
     public override void excute(int scriptIndex)
     {
-        Debug.Log("scenario scriptIndex : " + scriptIndex);
         switch (scriptIndex)
         {
             case 3:
@@ -60,7 +60,9 @@ public class ScenarioA1 : Scenario
             case 34:
                 backgroundRenderer.sprite = SpriteLoader.load("Images/A1/Backgrounds/gura_song");
                 mainCamTransform.translate(new Vector2(0, -9));
-                StartCoroutine(mainCamTransform.moveSmooth(new Vector2(0, 7), 2));
+                StartCoroutine(mainCamTransform.moveSmooth(new Vector2(0, 7), 0.5f));
+                break;
+            case 35:
                 break;
         }
     }

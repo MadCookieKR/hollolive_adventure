@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
             if (textVisualizer.currentScript != null)
             {
                 updateState(textVisualizer.scriptIndex);
+                textVisualizer.incrementScriptIndex();
             }
         }
     }
