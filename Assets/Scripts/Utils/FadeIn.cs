@@ -12,14 +12,14 @@ public class FadeIn
 
     public IEnumerator start(float duration)
     {
-        float amount = 0.1f;
+        float amount = 0.02f;
         while (spriteRenderer.color.a <= 1f)
         {
             Color c = spriteRenderer.color;
             c.a += amount;
             spriteRenderer.color = c;
 
-            yield return new WaitForSeconds(duration * 0.1f);
+            yield return new WaitForSeconds(duration * amount);
         }
 
     }

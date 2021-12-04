@@ -117,7 +117,7 @@ public class ScenarioA1 : Scenario
                 break;
             case 66:
                 transitionImage.color = new Color(255, 255, 255, 0);
-                StartCoroutine(Transition.fadeOut(5f, transitionImage));
+                StartCoroutine(Transition.fadeOut(3f, transitionImage));
                 break;
 
 
