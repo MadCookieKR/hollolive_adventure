@@ -5,15 +5,8 @@ using UnityEngine.UI;
 
 public class Transition
 {
-    private Image transitionImage;
 
-    public Transition(Image transitionImage)
-    {
-        this.transitionImage = transitionImage;
-    }
-
-
-    public IEnumerator fadeOut(float duration)
+    public static IEnumerator fadeOut(float duration, Image transitionImage)
     {
         float amount = 0.1f;
         while (transitionImage.color.a <= 1f)
@@ -26,7 +19,7 @@ public class Transition
         }
     }
 
-    public IEnumerator fadeIn(float duration)
+    public static IEnumerator fadeIn(float duration, Image transitionImage)
     {
         float amount = 0.1f;
         while (transitionImage.color.a > 0f)

@@ -24,7 +24,6 @@ public class ScenarioA1 : Scenario
     private List<AudioSource> audioValues;
     [SerializeField]
     private Image transitionImage;
-    private Transition transition;
 
     private Dictionary<AUDIO, AudioSource> audioDict = new Dictionary<AUDIO, AudioSource>();
 
@@ -42,7 +41,6 @@ public class ScenarioA1 : Scenario
 
         mainCamTransform = new AppTransform(Camera.main.transform);
         backgroundRenderer.sprite = SpriteLoader.load("Images/A1/Backgrounds/gura_pizza");
-        transition = new Transition(transitionImage);
         scriptDialog.SetActive(false);
 
         textVisualizer.onStart(this);
@@ -113,10 +111,14 @@ public class ScenarioA1 : Scenario
                 isTextVisualizerPause = true;
                 break;
             case 61:
+                audioDict[AUDIO.BGM_LOADING].Play();
                 isUpdatePause = false;
                 isTextVisualizerPause = false;
                 break;
-
+            case 66:
+                transitionImage.color = new Color(255, 255, 255, 0);
+                StartCoroutine(Transition.fadeOut(5f, transitionImage));
+                break;
 
 
         }
@@ -124,10 +126,11 @@ public class ScenarioA1 : Scenario
 
     private IEnumerator startTransition()
     {
-        yield return transition.fadeOut(0.5f / 2);
+        transitionImage.color = new Color(0,0,0,0);
+        yield return Transition.fadeOut(0.5f / 2, transitionImage);
         backgroundRenderer.sprite = SpriteLoader.load("Images/A1/Backgrounds/gura_song");
         mainCamTransform.translate(new Vector2(0, -9));
-        yield return transition.fadeIn(0.5f / 2);
+        yield return Transition.fadeIn(0.5f / 2, transitionImage);
         yield return mainCamTransform.moveSmooth(new Vector2(0, 7), 0.5f);
     }
 }

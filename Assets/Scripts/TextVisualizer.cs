@@ -30,7 +30,7 @@ public class TextVisualizer
     }
 
     //1부터 시작한다.
-    private int _scriptIndex = 53;
+    private int _scriptIndex = 65;
     public int scriptIndex { get { return _scriptIndex; } }
     public void incrementScriptIndex()
     {
