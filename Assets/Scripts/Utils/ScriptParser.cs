@@ -23,7 +23,6 @@ public class ScriptParser
         Match match = Regex.Match(line, pattern);
         string speaker = match.Groups[1].Value;
         string content = match.Groups[2].Value;
-        Debug.Log(speaker + "/" + content);
         Script script = new Script(speaker, content);
         return script;
     }

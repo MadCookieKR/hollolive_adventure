@@ -25,13 +25,21 @@ public class TextVisualizer : MonoBehaviour
         }
     }
 
-    private int _scriptIndex = 0;
+    private int _scriptIndex = 1;
     public int scriptIndex { get { return _scriptIndex; } }
 
     // Start is called before the first frame update
     void Start()
     {
+        //인덱스 시작을 1로 맞추기 위한 더미 스크립트
+        scripts.Add(new Script());
+
         scripts = new ScriptLoader().loadScript();
+
+        for(int i = 1; i<scripts.Count; i++)
+        {
+            Debug.Log("index: " + i + " content: " + scripts[i].content);
+        }
 
         if (scripts.Count > 0)
         {

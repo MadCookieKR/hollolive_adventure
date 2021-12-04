@@ -12,13 +12,13 @@ public class GameManager : MonoBehaviour
         {
             if (textVisualizer.currentScript != null)
             {
-                updateState((Script)textVisualizer.currentScript);
+                updateState(textVisualizer.scriptIndex);
             }
         }
     }
 
-    private void updateState(Script script)
+    private void updateState(int scriptIndex)
     {
-        scenario.excute(textVisualizer.scriptIndex + 1);
+        scenario.excute(scriptIndex);
     }
 }
