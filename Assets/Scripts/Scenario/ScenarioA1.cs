@@ -13,6 +13,8 @@ public class ScenarioA1 : Scenario
     }
 
     [SerializeField]
+    private List<Sprite> backgrounds;
+    [SerializeField]
     private SpriteRenderer backgroundRenderer;
     [SerializeField]
     private GameObject scriptDialog;
@@ -33,7 +35,7 @@ public class ScenarioA1 : Scenario
         audioStore.init();
 
         mainCamTransform = new AppTransform(Camera.main.transform);
-        backgroundRenderer.sprite = SpriteLoader.load("Images/A1/Backgrounds/gura_pizza");
+        backgroundRenderer.sprite = backgrounds[0];
         scriptDialog.SetActive(false);
 
         textVisualizer.onStart(this);
@@ -121,7 +123,7 @@ public class ScenarioA1 : Scenario
     {
         transitionImage.color = new Color(0,0,0,0);
         yield return Transition.fadeOut(0.5f / 2, transitionImage);
-        backgroundRenderer.sprite = SpriteLoader.load("Images/A1/Backgrounds/gura_song");
+        backgroundRenderer.sprite = backgrounds[1];
         mainCamTransform.translate(new Vector2(0, -9));
         yield return Transition.fadeIn(0.5f / 2, transitionImage);
         yield return mainCamTransform.moveSmooth(new Vector2(0, 7), 0.5f);

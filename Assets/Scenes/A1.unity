@@ -977,6 +977,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b13106806f1114fa70c5b49931e010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgrounds:
+  - {fileID: 21300000, guid: 9c6d8b94157e6ab4cb80b8395e71dddb, type: 3}
+  - {fileID: 21300000, guid: 8d5bd960f67b79a4f9373c0cb43a709f, type: 3}
   backgroundRenderer: {fileID: 878599000}
   scriptDialog: {fileID: 1483346684}
   textVisualizer:

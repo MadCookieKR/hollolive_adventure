@@ -509,7 +509,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801396167}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -728,22 +728,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c2805b6e33d134fbeff375f6a47c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: a97c58826eec1f04b93652cb65237471, type: 3}
-  - {fileID: 21300000, guid: 32908e2407c5d574ab132e162c57dd51, type: 3}
-  - {fileID: 21300000, guid: 145b95398824bf24ca2b67d06ff5dd68, type: 3}
-  backgroundRenderer: {fileID: 801396168}
-  scriptDialog: {fileID: 68111086}
-  textVisualizer:
-    speakerText: {fileID: 475777857}
-    contentText: {fileID: 32629407}
-    secondPerChar: 0.02
-    isUpdateStateOnAwake: 1
-    script: {fileID: 4900000, guid: 9afd9ace21f7f694480e293fddaa46fa, type: 3}
-  audioStore:
-    keys: 
-    values: []
-  transitionImage: {fileID: 361398727}
+  scenarioDelegate:
+    backgrounds:
+    - {fileID: 21300000, guid: a97c58826eec1f04b93652cb65237471, type: 3}
+    - {fileID: 21300000, guid: 32908e2407c5d574ab132e162c57dd51, type: 3}
+    - {fileID: 21300000, guid: 145b95398824bf24ca2b67d06ff5dd68, type: 3}
+    backgroundRenderer: {fileID: 801396168}
+    textVisualizer:
+      speakerText: {fileID: 475777857}
+      contentText: {fileID: 32629407}
+      secondPerChar: 0.02
+      isUpdateStateOnAwake: 1
+      script: {fileID: 4900000, guid: 9afd9ace21f7f694480e293fddaa46fa, type: 3}
+    audioStore:
+      keys: 
+      values: []
+    scriptDialog: {fileID: 68111086}
+    transitionImage: {fileID: 361398727}
 --- !u!4 &1565440120
 Transform:
   m_ObjectHideFlags: 0

@@ -1,15 +1,12 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ScenarioA2 : Scenario
 {
     [Serializable]
     public enum AUDIO
     {
-        
+
     }
 
     [SerializeField]
@@ -24,6 +21,11 @@ public class ScenarioA2 : Scenario
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            excute(scenarioDelegate.getCurrentScriptIndex());
+        }
+
         scenarioDelegate.onUpdate(this);
     }
 
@@ -32,10 +34,12 @@ public class ScenarioA2 : Scenario
     {
         switch (scriptIndex)
         {
-            case 1:
+            case 3:
+                StartCoroutine(scenarioDelegate.basicTransition());
+               // StartCoroutine(scenarioDelegate.moveUpTransition(-9, 5, 0.5f));
                 break;
         }
     }
 
- 
+
 }
