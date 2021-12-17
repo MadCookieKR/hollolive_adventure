@@ -9,49 +9,32 @@ public class ScenarioA2 : Scenario
     [Serializable]
     public enum AUDIO
     {
-
+        
     }
 
     [SerializeField]
-    private List<Sprite> sprites;
-    [SerializeField]
-    private SpriteRenderer backgroundRenderer;
-    [SerializeField]
-    private GameObject scriptDialog;
-    [SerializeField]
-    private TextVisualizer textVisualizer;
-    [SerializeField]
-    SerializableDictionary<AUDIO, AudioSource> audioStore;
-    [SerializeField]
-    private Image transitionImage;
+    SimpleScenarioDelegate<AUDIO> scenarioDelegate;
 
-    private AppTransform mainCamTransform;
 
-    void Start()
+    private void Start()
     {
-        audioStore.init();
-
-        mainCamTransform = new AppTransform(Camera.main.transform);
-        backgroundRenderer.sprite = sprites[0];
-
-        textVisualizer.onStart(this);
-        textVisualizer.incrementScriptIndex();
+        scenarioDelegate.onStart(this);
     }
+
 
     private void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            textVisualizer.onUpdate(this);
-            textVisualizer.incrementScriptIndex();
-        }
+        scenarioDelegate.onUpdate(this);
     }
 
 
     public override void excute(int scriptIndex)
     {
-       
+        switch (scriptIndex)
+        {
+            case 1:
+                break;
+        }
     }
 
  
