@@ -10,8 +10,8 @@ public class TextVisualizer
     public Text speakerText;
     public Text contentText;
     public float secondPerChar = 0.02F;
-    public bool isUpdateStateOnAwake = false;
-
+    public bool isUpdateStateOnAwake = true;
+    public TextAsset script;
 
     private List<Script> scripts = new List<Script>();
     public Script? currentScript
@@ -29,7 +29,7 @@ public class TextVisualizer
         }
     }
 
-    //1부터 시작한다.
+    //스크립트 라인넘버와 맞추기 위해 1부터 시작
     private int _scriptIndex = 1;
     public int scriptIndex { get { return _scriptIndex; } }
     public void incrementScriptIndex()
@@ -42,10 +42,11 @@ public class TextVisualizer
 
     public void onStart(MonoBehaviour monoBehaviour)
     {
-        //인덱스 시작을 1로 맞추기 위한 더미 스크립트
+        //인덱스가 1부터 시작하기 위해 빈 스크립트 추가
         scripts.Add(new Script());
-        scripts.AddRange(new ScriptLoader().loadScript());
+        scripts.AddRange(new ScriptLoader(script).loadScript());
 
+        updateStateCoroutine = updateState(scripts[scriptIndex]);
         if (isUpdateStateOnAwake && scripts.Count > 0)
         {
             monoBehaviour.StartCoroutine(updateStateCoroutine);

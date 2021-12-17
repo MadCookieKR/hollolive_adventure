@@ -984,13 +984,15 @@ MonoBehaviour:
     contentText: {fileID: 1015641227}
     secondPerChar: 0.02
     isUpdateStateOnAwake: 0
-  audioKeys: 0000000001000000020000000300000004000000
-  audioValues:
-  - {fileID: 2030212175}
-  - {fileID: 2030212179}
-  - {fileID: 2030212180}
-  - {fileID: 2030212182}
-  - {fileID: 2030212181}
+    script: {fileID: 4900000, guid: 30de88db77537e343a673127b780db12, type: 3}
+  audioStore:
+    keys: 0000000001000000020000000300000004000000
+    values:
+    - {fileID: 2030212175}
+    - {fileID: 2030212179}
+    - {fileID: 2030212180}
+    - {fileID: 2030212182}
+    - {fileID: 2030212181}
   transitionImage: {fileID: 1396010168}
 --- !u!4 &2030212178
 Transform:

@@ -19,13 +19,9 @@ public class ScenarioA1 : Scenario
     [SerializeField]
     private TextVisualizer textVisualizer;
     [SerializeField]
-    private List<AUDIO> audioKeys;
-    [SerializeField]
-    private List<AudioSource> audioValues;
+    SerializableDictionary<AUDIO, AudioSource> audioStore;
     [SerializeField]
     private Image transitionImage;
-
-    private Dictionary<AUDIO, AudioSource> audioDict = new Dictionary<AUDIO, AudioSource>();
 
     private AppTransform mainCamTransform;
 
@@ -34,10 +30,7 @@ public class ScenarioA1 : Scenario
 
     void Start()
     {
-        for (int i = 0; i < audioKeys.Count; i++)
-        {
-            audioDict.Add(audioKeys[i], audioValues[i]);
-        }
+        audioStore.init();
 
         mainCamTransform = new AppTransform(Camera.main.transform);
         backgroundRenderer.sprite = SpriteLoader.load("Images/A1/Backgrounds/gura_pizza");
@@ -48,7 +41,7 @@ public class ScenarioA1 : Scenario
 
     private void Update()
     {
-        if (!audioDict[AUDIO.BGM_GALAXY].isPlaying)
+        if (!audioStore.get(AUDIO.BGM_GALAXY).isPlaying)
         {
             isUpdatePause = false;
         }
@@ -86,10 +79,10 @@ public class ScenarioA1 : Scenario
         switch (scriptIndex)
         {
             case 3:
-                audioDict[AUDIO.PX_GURA_PIZZA_TIME].Play();
+                audioStore.get(AUDIO.PX_GURA_PIZZA_TIME).Play();
                 break;
             case 7:
-                audioDict[AUDIO.FX_GURA_PIZZA].Play();
+                audioStore.get(AUDIO.FX_GURA_PIZZA).Play();
                 break;
             case 35:
                 StartCoroutine(startTransition());
@@ -99,19 +92,19 @@ public class ScenarioA1 : Scenario
                 isTextVisualizerPause = false;
                 break;
             case 51:
-                audioDict[AUDIO.FX_GURA_HUM].Play();
+                audioStore.get(AUDIO.FX_GURA_HUM).Play();
                 break;
             case 57:
-                audioDict[AUDIO.BGM_LOADING].Stop();
-                audioDict[AUDIO.FX_GURA_HUM].Stop();
-                audioDict[AUDIO.BGM_GALAXY].Play();
+                audioStore.get(AUDIO.BGM_LOADING).Stop();
+                audioStore.get(AUDIO.FX_GURA_HUM).Stop();
+                audioStore.get(AUDIO.BGM_GALAXY).Play();
                 break;
             case 60:
                 isUpdatePause = true;
                 isTextVisualizerPause = true;
                 break;
             case 61:
-                audioDict[AUDIO.BGM_LOADING].Play();
+                audioStore.get(AUDIO.BGM_LOADING).Play();
                 isUpdatePause = false;
                 isTextVisualizerPause = false;
                 break;
