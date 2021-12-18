@@ -35,8 +35,6 @@ public class ScenarioA2 : Scenario
         switch (scriptIndex)
         {
             case 3:
-                StartCoroutine(scenarioDelegate.basicTransition());
-               // StartCoroutine(scenarioDelegate.moveUpTransition(-9, 5, 0.5f));
                 break;
         }
     }
